@@ -1,2 +1,6 @@
-/job.class
-/os.class
+*.class
+
+# Package Files #
+*.jar
+*.war
+*.ear
