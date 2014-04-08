@@ -3,7 +3,7 @@ import java.util.Date;
 
 public class job {
 	
-	private long jobNum;
+//	private long jobNum;
 	private long jobPriority;
 	private long jobSize;
 	private long CPUTime;
