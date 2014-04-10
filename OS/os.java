@@ -31,7 +31,6 @@ class os {
 	public static void Crint(int[] a, int[] p) {
    
    //At the moment the crint only accepts a job and
-   //tries to run it immediately
    //no checking wether its full, busy, etc
    //Just trying to get 1 job running first
    
@@ -50,11 +49,6 @@ class os {
       //keeping track of the ending of each job in memory
       endPointer = endPointer+p[3];
       System.out.println("ending in address, "+ endPointer);
-      
-      FirstComeFirstServe(a, p);
-      
-      
-      
       
 	}
    
@@ -82,6 +76,9 @@ class os {
 	/* DRUM INTERRUPT */
 	public static void Drmint(int[] a, int[] p) {
 	  System.out.println("Currently at Drmint "); 
+     //after crint the sos calls drmint so i am just sending it
+     //back to scheduler to keep testing
+     FirstComeFirstServe(a, p);
 	}
 	
 	/* TIMER-RUN-OUT */
@@ -91,7 +88,14 @@ class os {
 	
 	/* SUPERVISOR CALL FROM USER PROGRAM */
 	public static void Svc(int[] a, int[] p) {
-      System.out.println("Currently at SVC job wants to: "+a[0]);       
+      System.out.println("Currently at SVC job wants to: "+a[0]);
+      
+      //I know job wants to do IO from the print,
+      // so i just made a conditional statement to see if it works
+      if(a[0]==6) {
+         sos.siodisk(jobTable.get(current).getJobNum());
+         FirstComeFirstServe(a, p);
+         }       
 	}	
 
 }
