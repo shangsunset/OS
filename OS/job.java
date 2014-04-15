@@ -2,52 +2,56 @@
 
 public class job {
 	
-	private long jobNum;
-	private long jobPriority;
-	private long jobSize;
-	private long CPUTime;
-	private long currentTime;
-	
+	private int jobNum;
+	private int jobPriority;
+	private int jobSize;
+	private int CpuTime;
+	private int currentTime;
+	private int jobAddress;
+   
 	public job() {}
 	
-	public job(long jobNum, long jobPriority, long jobSize, long CPUTime, long currentTime){
-		this.jobNum = jobNum;
-		this.jobPriority = jobPriority;
-		this.jobSize = jobSize;
-		this.CPUTime = CPUTime;
-		this.currentTime = currentTime;
-	}
+   public job(int address, int p[]) {
+      jobAddress = address;
+      jobNum = p[1];
+      jobPriority = p[2];
+      jobSize = p[3];
+      CpuTime = p[4];
+      currentTime = p[5];
+   }
 	
+   public int getJobAddress() {
+         return jobAddress;
+   }
 	
-	
-	public long getJobNum() {
+	public int getJobNum() {
 		return jobNum;
 	}
-	public void setJobNum(long jobNum) {
+	public void setJobNum(int jobNum) {
 		this.jobNum = jobNum;
 	}
-	public long getJobPriority() {
+	public int getJobPriority() {
 		return jobPriority;
 	}
-	public void setJobPriority(long jobPriority) {
+	public void setJobPriority(int jobPriority) {
 		this.jobPriority = jobPriority;
 	}
-	public long getJobSize() {
+	public int getJobSize() {
 		return jobSize;
 	}
-	public void setJobSize(long jobSize) {
+	public void setJobSize(int jobSize) {
 		this.jobSize = jobSize;
 	}
-	public long getCPUTime() {
-		return CPUTime;
+	public int getCpuTime() {
+		return CpuTime;
 	}
-	public void setCPUTime(long cPUTime) {
-		CPUTime = cPUTime;
+	public void setCPUTime(int CpuTime) {
+		this.CpuTime = CpuTime;
 	}
-	public long getCurrentTime() {
+	public int getCurrentTime() {
 		return currentTime;
 	}
-	public void setCurrentTime(long currentTime) {
+	public void setCurrentTime(int currentTime) {
 		this.currentTime = currentTime;
 	}
 	
