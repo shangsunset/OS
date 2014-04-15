@@ -7,3 +7,6 @@
 /.settings
 /.classpath
 /.project
+.idea
+OS-Simulation.iml
+
