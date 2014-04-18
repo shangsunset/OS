@@ -4,14 +4,14 @@ class os {
 	
 	/* INITIALIZATION */
 	public static LinkedList<job> jobTable;
-   public static int endPointer; //points to the last address for each job
+    public static int endPointer; //points to the last address for each job
                                  //or 0 for 1st job in
-   public static int current; //keeps track of the current job at job table
+    public static int current; //keeps track of the current job at job table
 
 	public static void startup() {
-	   jobTable = new LinkedList<job>(); //Initialize job table
-      endPointer = 0;  //Start at the beginning
-      current = 0; //no jobs at the moment start at 0
+	     jobTable = new LinkedList<job>(); //Initialize job table
+         endPointer = 0;  //Start at the beginning
+         current = 0; //no jobs at the moment start at 0
 	}
 
 	/*	
@@ -28,6 +28,7 @@ class os {
 
 	/* INDICATES ARRIVAL OF A NEW JOB ON THE DRUM */
 	/* SAVE INFORMATION ABOUT NEW COMING JOB */
+
 	public static void Crint(int[] a, int[] p) {
    
    //At the moment the crint only accepts a job and
@@ -35,7 +36,7 @@ class os {
    //Just trying to get 1 job running first
    
       //printing everything for debugging purposes
-		System.out.println("Job Arriving: number " +p[1]+ ", priority "+
+	  System.out.println("Job Arriving: number " +p[1]+ ", priority "+
       p[2]+", size "+p[3]+", cputime "+p[4]+", currenttime "+p[5]);
 		
       //storing theinformation of the new jobs into jobTable
