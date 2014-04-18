@@ -1,5 +1,6 @@
 import java.util.*;
 
+
 class os {
 	
 	/* INITIALIZATION */
@@ -56,8 +57,12 @@ class os {
    // I put a print on all interrupts to know where the job is at
    
    public static void FirstComeFirstServe(int[] a, int[] p) {
-     System.out.println("Currently at FCFS "); 
-      //if there is a job to run, set a to 2
+
+      System.out.println("Currently at FCFS ");
+
+      Collections.sort(jobTable);  //will sort jobTable based on the current time
+
+       //if there is a job to run, set a to 2
       a[0] = 2;
       //put information about job
       //current job address to p[2]
@@ -66,6 +71,7 @@ class os {
       p[3] = jobTable.get(current).getJobSize();
       //current job time slice to p[4]
       p[4] = jobTable.get(current).getCpuTime();
+
    }
       
    
