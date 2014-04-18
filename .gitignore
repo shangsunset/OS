@@ -2,7 +2,7 @@
 *.jar
 *.war
 *.ear
-.idea/
+.idea/*
 OS-Simulation.iml
 
 
