@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="505c362c-aa42-45bb-be88-c84d5bde7d6e" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/OS/os.java" afterPath="$PROJECT_DIR$/OS/os.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="OS-Simulation.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -11,7 +12,6 @@
     <file path="/a.java" changelist="505c362c-aa42-45bb-be88-c84d5bde7d6e" time="1397138076829" ignored="false" />
     <file path="/sample.java" changelist="505c362c-aa42-45bb-be88-c84d5bde7d6e" time="1397138056463" ignored="false" />
     <file path="/.gitignore" changelist="505c362c-aa42-45bb-be88-c84d5bde7d6e" time="1397591708199" ignored="false" />
-    <file path="$PROJECT_DIR$/.idea/workspace.xml" changelist="505c362c-aa42-45bb-be88-c84d5bde7d6e" time="1397596095879" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -86,10 +86,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="os.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="os.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/OS/os.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="50" column="35" selection-start="1590" selection-end="1590" vertical-scroll-proportion="-0.42549923">
+            <state line="50" column="35" selection-start="1590" selection-end="1590" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name=".gitignore" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="4" column="6" selection-start="32" selection-end="32" vertical-scroll-proportion="0.09831029">
               <folding />
             </state>
           </provider>
@@ -117,6 +126,7 @@
         <option value="$PROJECT_DIR$/OS/job.java" />
         <option value="$PROJECT_DIR$/OS/.gitignore" />
         <option value="$PROJECT_DIR$/OS/os.java" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -355,7 +365,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="22" width="1280" height="774" extended-state="1" />
+    <frame x="0" y="22" width="1280" height="774" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32874617" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -483,13 +493,6 @@
         <state line="2" column="30" selection-start="109" selection-end="109" vertical-scroll-proportion="0.049155146" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/OS/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="0" selection-start="84" selection-end="84" vertical-scroll-proportion="0.24577573">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/OS/job.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="20" column="4" selection-start="375" selection-end="375" vertical-scroll-proportion="0.0">
@@ -499,7 +502,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/OS/os.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="50" column="35" selection-start="1590" selection-end="1590" vertical-scroll-proportion="-0.42549923">
+        <state line="50" column="35" selection-start="1590" selection-end="1590" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="6" selection-start="32" selection-end="32" vertical-scroll-proportion="0.09831029">
           <folding />
         </state>
       </provider>
