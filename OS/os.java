@@ -60,7 +60,6 @@ class os {
 
       System.out.println("Currently at FCFS ");
 
-      Collections.sort(jobTable);  //will sort jobTable based on the current time
 
        //if there is a job to run, set a to 2
       a[0] = 2;
@@ -85,7 +84,7 @@ class os {
 	  System.out.println("Currently at Drmint "); 
      //after crint the sos calls drmint so i am just sending it
      //back to scheduler to keep testing
-     FirstComeFirstServe(a, p);
+        FirstComeFirstServe(a, p);
 	}
 	
 	/* TIMER-RUN-OUT */

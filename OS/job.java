@@ -1,6 +1,6 @@
 
 
-public class job implements Comparable <job> {
+public class job  {
 	
 	private int jobNum;
 	private int jobPriority;
@@ -57,22 +57,22 @@ public class job implements Comparable <job> {
 	}
 
     //for comparing each job's current time when using FCFS
-    @Override
-    public int compareTo(job other) {
-
-        int comparedCurrentTime = other.getCurrentTime();
-
-        if (this.getCurrentTime() > comparedCurrentTime) {
-            return 1;
-        }
-        else if (this.getCurrentTime() < comparedCurrentTime){
-            return -1;
-
-        }
-        else
-            return 0;
-
-
-    }
+//    @Override
+//    public int compareTo(job other) {
+//
+//        int comparedCurrentTime = other.getCurrentTime();
+//
+//        if (this.getCurrentTime() > comparedCurrentTime) {
+//            return 1;
+//        }
+//        else if (this.getCurrentTime() < comparedCurrentTime){
+//            return -1;
+//
+//        }
+//        else
+//            return 0;
+//
+//
+//    }
 	
 }
