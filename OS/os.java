@@ -7,6 +7,7 @@ class os {
     	public static int current; //keeps track of the current job at job table
 	public static int timeSpentCpu; //keeps track of cpu running time
 	public static boolean CpuIdling; //flag to know if cpu is in use or not
+	public static boolean ioFlag;
    
 	public static void startup() {
 	  	//sos.ontrace();
@@ -15,6 +16,7 @@ class os {
       		current = 0; //no jobs at the moment start at 0
 	  	timeSpentCpu = 0; //init to 0
 	  	CpuIdling = false; //at the start cpu is idling
+		ioFlag = false;
 	}
 
 	/*	
@@ -34,6 +36,8 @@ class os {
       		//storing the information of the new jobs into jobTable
 	  	job newJob = new job(endPointer, p);
 	  	jobTable.add(newJob);
+	  
+		updateTimer(p[5]);
 	  
       		//place job into memory by calling sos (In core)
       		sos.siodrum(p[1], p[3], endPointer, 0);
@@ -81,11 +85,15 @@ class os {
 	  	//time spent using cpu to the current time and add it
 	  	//to the job's running time
 	  	//(this is how we keep track of quantum of time)
-	  	if(CpuIdling == false) {
+	  	/*
+		if(CpuIdling == false) {
 			jobTable.get(current).updateCurrentTime(p[5], timeSpentCpu);
 			System.out.println("CurrentTime = " + jobTable.get(current).getCurrentTime());
 		}
-	  
+		*/
+		ioFlag = false; //finished doing io
+		updateTimer(p[5]);
+	
 	  	//go back to schedule the job to run
 	  	FirstComeFirstServe(a, p);
 	}
@@ -98,11 +106,14 @@ class os {
 	  	//time spent using cpu to the current time and add it
 	  	//to the job's running time
 	  	//(this is how we keep track of quantum of time)
-	  	if(CpuIdling == false) {
+	  	/*
+		if(CpuIdling == false) {
 			jobTable.get(current).updateCurrentTime(p[5], timeSpentCpu);
 			System.out.println("CurrentTime = " + jobTable.get(current).getCurrentTime());
 		}
-	  
+		*/
+		
+		updateTimer(p[5]);
 	  	//go back to schedule the job to run
       		FirstComeFirstServe(a, p);
 	}
@@ -115,11 +126,13 @@ class os {
 	  	//time spent using cpu to the current time and add it
 	  	//to the job's running time
 	  	//(this is how we keep track of quantum of time)
-	  	if(CpuIdling == false) {
+	  	/*
+		if(CpuIdling == false) {
 			jobTable.get(current).updateCurrentTime(p[5], timeSpentCpu);
 			System.out.println("CurrentTime = " + jobTable.get(current).getCurrentTime());
 		}
-	  
+		*/
+		updateTimer(p[5]);
 	  	//go back to schedule the job to run
 	  	FirstComeFirstServe(a, p);
 	}
@@ -132,11 +145,13 @@ class os {
 	  	//time spent using cpu to the current time and add it
 	  	//to the job's running time
 	  	//(this is how we keep track of quantum of time)
-	  	if(CpuIdling == false) {
+	  	/*
+		if(CpuIdling == false) {
 			jobTable.get(current).updateCurrentTime(p[5], timeSpentCpu);
 			System.out.println("CurrentTime = " + jobTable.get(current).getCurrentTime());
 		}
-	  
+		*/
+		updateTimer(p[5]);
 	  	//job wishes to terminate, so we increment the current job #
 	  	//and set the idling flag back to true
 	  	if(a[0] == 5) {
@@ -148,6 +163,7 @@ class os {
 	  	//job wants to do io, so we call siodisk
 	  	//then go back to scheduler
       		if(a[0] == 6) {
+				ioFlag = true; //is doing io
         		sos.siodisk(jobTable.get(current).getJobNum());
         		FirstComeFirstServe(a, p);
         	}   
@@ -155,10 +171,21 @@ class os {
 	 	//since at the moment we know theres no pending io
 	  	//we just set idling flag to true
 	  	if(a[0] == 7) {
+			if(ioFlag == false)
+				FirstComeFirstServe(a, p); //schedule a job to run
+			else { //blocks
 			a[0] = 1;
 			CpuIdling = true;
+			}
 		}
 	}	
+	
+	public static void updateTimer(int p) {
+		if(CpuIdling == false) {
+			jobTable.get(current).updateCurrentTime(p, timeSpentCpu);
+			System.out.println("CurrentTime = " + jobTable.get(current).getCurrentTime());
+		}
+	}
 
 }
 
