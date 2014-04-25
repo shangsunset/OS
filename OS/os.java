@@ -133,6 +133,20 @@ class os {
 		}
 		*/
 		updateTimer(p[5]);
+		
+		if(jobTable.get(current).getCpuTime() <= jobTable.get(current).getCurrentTime()) {
+			//job is forced out so we increment our current job #
+			//set a[0] to 1, to let sos know
+			//set the cpu back to idling 
+				current++;
+				a[0]=1;
+				CpuIdling = true;
+			}
+		else {
+		//go back to schedule a job to run
+			FirstComeFirstServe(a, p);
+		}
+		
 	  	//go back to schedule the job to run
 	  	FirstComeFirstServe(a, p);
 	}
