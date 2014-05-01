@@ -1,25 +1,27 @@
 import java.util.LinkedList;
 
-public class drumManager {
+public class DrumManager {
 
-    public LinkedList<job> drumQueue;
-    public LinkedList<job> jobTable;
+    public LinkedList<Job> drumQueue;
+    public LinkedList<Job> jobTable;
 
-    public drumManager(LinkedList<job> jobTable) {
+    public DrumManager(LinkedList<Job> jobTable) {
 
-        drumQueue = new LinkedList<job>();
+        drumQueue = new LinkedList<Job>();
         this.jobTable = jobTable;
     }
 
-    public void swapper(job job, int transferDir) {
+    public void swapper(Job job, int transferDir) {
 
 
         switch (transferDir) {
 
             //drum to memory
             case 0:
+                if(drumQueue.size() > 0) {
                 sos.siodrum(job.getJobNum(), job.getJobSize(), job.getJobAddress(), 0);
                 removeFromDrumQueue(job);
+                }
                 break;
 
             //memory to drum
@@ -32,11 +34,11 @@ public class drumManager {
 
     }
 
-    public void addToDrumQeueu(job job) {
+    public void addToDrumQeueu(Job job) {
         drumQueue.add(job);
     }
 
-    public void removeFromDrumQueue(job job) {
-        drumQueue.remove(job);
+    public void removeFromDrumQueue(Job job) {
+        drumQueue.remove(job.getJobNum());
     }
 }

@@ -2,14 +2,14 @@ import java.util.*;
 
 public class os {
 	/* INITIALIZATION */
-    public static LinkedList<job> jobTable;
+    public static LinkedList<Job> jobTable;
     public static int cpuTimeUsed;
     public static int currentTime;
-    public static drumManager drumManager;
+    public static DrumManager drumManager;
 
     public static void startup() {
 	  	//sos.ontrace();
-        drumManager = new drumManager(jobTable);
+        drumManager = new DrumManager(jobTable);
 	}
 
 	/*	
