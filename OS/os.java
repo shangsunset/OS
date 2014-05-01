@@ -3,7 +3,7 @@ import java.util.*;
 public class os {
 	/* INITIALIZATION */
     public static LinkedList<Job> jobTable;
-    public static int cpuTimeUsed;
+    public static int cpuTimeUsed = 0;
     public static int currentTime = 0;
     public static DrumManager drumManager;
     public static int drumToMemory = 0;
@@ -51,6 +51,10 @@ public class os {
 	
 	/* TIMER-RUN-OUT */
 	public static void Tro(int[] a, int[] p) {
+
+        bookkeeper(p[5]);
+
+
 	}
 	
 	/* SUPERVISOR CALL FROM USER PROGRAM */
@@ -59,9 +63,9 @@ public class os {
 	
 	public static void bookkeeper(int time){
 
-        int timeDifference = time - currentTime;
+        int timeDifference = time - cpuTimeUsed;
         runningJob.setCurrentTime(runningJob.getCurrentTime() + timeDifference);
-        currentTime = time;
+        cpuTimeUsed = time;
 
 	}
 

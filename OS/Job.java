@@ -57,12 +57,17 @@ public class Job {
         return jobPriority;
     }
 
+
     public int getJobSize() {
         return jobSize;
     }
 
     public int getmaxCpuTime() {
         return maxCpuTime;
+    }
+
+    public void setCurrentTime(int currentTime) {
+        this.currentTime = currentTime;
     }
 
     public int getCurrentTime() {
