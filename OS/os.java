@@ -4,8 +4,10 @@ public class os {
 	/* INITIALIZATION */
     public static LinkedList<Job> jobTable;
     public static int cpuTimeUsed;
-    public static int currentTime;
+    public static int currentTime = 0;
     public static DrumManager drumManager;
+    public static int drumToMemory = 0;
+    public static int memoryToDrum = 1;
 
     public static void startup() {
 	  	//sos.ontrace();
@@ -23,7 +25,10 @@ public class os {
 	/* SAVE INFORMATION ABOUT NEW COMING JOB */
 	public static void Crint(int[] a, int[] p) {
 
+        bookkeeper(p[5]);
 
+        //swap into drum queue
+        drumManager.swapper(runningJob, drumToMemory);
 	}
    
 	//printing on all interrupts to know where the job is at
@@ -38,7 +43,11 @@ public class os {
 
 	/* DRUM INTERRUPT */
 	public static void Drmint(int[] a, int[] p) {
-	}
+
+        bookkeeper(p[5]);
+
+
+    }
 	
 	/* TIMER-RUN-OUT */
 	public static void Tro(int[] a, int[] p) {
@@ -48,7 +57,12 @@ public class os {
 	public static void Svc(int[] a, int[] p) {
 	}	
 	
-	public static void bookkeeper(int p){
+	public static void bookkeeper(int time){
+
+        int timeDifference = time - currentTime;
+        runningJob.setCurrentTime(runningJob.getCurrentTime() + timeDifference);
+        currentTime = time;
+
 	}
 
 }
