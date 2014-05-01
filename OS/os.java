@@ -1,10 +1,15 @@
 import java.util.*;
 
-class os {	
+public class os {
 	/* INITIALIZATION */
+    public static LinkedList<job> jobTable;
+    public static int cpuTimeUsed;
+    public static int currentTime;
+    public static drumManager drumManager;
 
-	public static void startup() {
+    public static void startup() {
 	  	//sos.ontrace();
+        drumManager = new drumManager(jobTable);
 	}
 
 	/*	
@@ -17,6 +22,8 @@ class os {
 	/* INDICATES ARRIVAL OF A NEW JOB ON THE DRUM */
 	/* SAVE INFORMATION ABOUT NEW COMING JOB */
 	public static void Crint(int[] a, int[] p) {
+
+
 	}
    
 	//printing on all interrupts to know where the job is at
