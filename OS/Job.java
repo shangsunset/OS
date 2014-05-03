@@ -3,7 +3,9 @@ public class Job {
     private int jobNum;
     private int jobPriority;
     private int jobSize;
-    private int maxCpuTime;
+    private int cpuTime;
+    private int cpuTimeUsed;
+    private int CpuTimeLeft;
     private int currentTime;
     private int jobAddress;
     private boolean isBlocked = false;
@@ -20,8 +22,8 @@ public class Job {
         jobNum = p[1];
         jobPriority = p[2];
         jobSize = p[3];
-        maxCpuTime = p[4];
-        currentTime = 0;
+        cpuTime = p[4];
+        cpuTimeUsed = 0;
     }
 
 
@@ -62,20 +64,24 @@ public class Job {
         return jobSize;
     }
 
-    public int getmaxCpuTime() {
-        return maxCpuTime;
+    public int getCpuTimeLeft() {
+        return CpuTimeLeft;
     }
 
-    public void setCurrentTime(int currentTime) {
-        this.currentTime = currentTime;
+    public void setCpuTimeLeft(int cpuTimeLeft) {
+        CpuTimeLeft = cpuTimeLeft;
     }
 
-    public int getCurrentTime() {
-        return currentTime;
+    public int getCpuTime() {
+        return cpuTime;
     }
 
-    public void updateCurrentTime(int time, int cpuTimeUsed) {
-        currentTime = currentTime + (time-cpuTimeUsed);
+    public int getCpuTimeUsed() {
+        return cpuTimeUsed;
+    }
+
+    public void setCpuTimeUsed(int cpuTimeUsed) {
+        this.cpuTimeUsed = cpuTimeUsed;
     }
 }
 
