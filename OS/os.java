@@ -3,7 +3,6 @@ import java.util.*;
 public class os {
 	/* INITIALIZATION */
     public static LinkedList<Job> jobTable;
-    public static int cpuTimeUsed = 0;
     public static int currentTime = 0;
     public static DrumManager drumManager;
     public static CpuScheduler scheduler;
@@ -31,6 +30,12 @@ public class os {
 
         //swap into drum queue
         drumManager.swapper(runningJob, drumToMemory);
+
+        //put new job to ready queue
+        scheduler.addJobToReadyQueue(runningJob);
+
+        //choose a job to run on cpu
+        scheduler.schedule(a, p);
 	}
    
 	//printing on all interrupts to know where the job is at
@@ -69,34 +74,22 @@ public class os {
 
 
         }
-        //run out of a tiem slice
+        //run out of a time slice
         else {
 
-            //If  process has CPU time less than 1 time quantum
-            if(runningJob.getCpuTime() <= runningJob.getTimeQuantum()) {
+                bookkeeper(p[5]);
 
                 //process finished, indicate CPU is idle now
                 scheduler.setCpuIdle(true);
 
-                //Process will leave the CPU after the completion
-                //CPU will proceed with the next process in the ready queue
-                scheduler.schedule(a, p);
-
-            }
-            // process has cpuTime longer than 1 time slice
-            else {
                 //Executed process is then placed at the tail of the ready querue by applying the context switch
                 scheduler.addJobToRQ(runningJob);
-                runningJob.setCpuTimeLeft(runningJob.getCpuTime() - runningJob.getTimeQuantum());
-                runningJob.setCpuTimeUsed(runningJob.getCpuTimeUsed() + runningJob.getTimeQuantum());
 
-                //process finished, indicate CPU is idle now
-                scheduler.setCpuIdle(true);
 
                 //CPU scheduler then proceeds by selecting the next process in the ready queue
                 scheduler.schedule(a, p);
                 
-            }
+
 
         }
 
@@ -110,11 +103,12 @@ public class os {
 	public static void Svc(int[] a, int[] p) {
 	}	
 	
-	public static void bookkeeper(int time){
+	public static void bookkeeper(int realTime){
 
-        int timeDifference = time - cpuTimeUsed;
-        runningJob.setCurrentTime(runningJob.getCurrentTime() + timeDifference);
-        cpuTimeUsed = time;
+        if(!scheduler.isCpuIdle()) {
+         	runningJob.updateCpuTimeUsed(realTime, currentTime);
+         	System.out.println("CPU time used = " + runningJob.getCpuTimeUsed());
+        }
 
 	}
 

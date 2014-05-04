@@ -16,7 +16,7 @@ public class CpuScheduler {
     }
 
 
-    public void addJobToRQ(Job newJob) {
+    public void addJobToReadyQueue(Job newJob) {
 
         readyQueue.add(newJob);
     }
@@ -43,26 +43,30 @@ public class CpuScheduler {
         while(readyQueue.size() >0 && isCpuIdle) {
             //remove the job about to run from ready queue
             jobToRun = readyQueue.remove(0);
-            //rotate the queue to point to next job. it will be next jobToRun after current jobToRun finishes
-            Collections.rotate(readyQueue, 1);
 
-            //send jobToRun to CPU
-            a[0] = 2;
-            p[2] = jobToRun.getJobAddress();
-            p[3] = jobToRun.getJobSize();
-            p[4] = timeQuantum;
+            if(readyQueue.size() > 0) {
+                //rotate the queue to point to next job. it will be next jobToRun after current jobToRun finishes
+                Collections.rotate(readyQueue, 1);
+            }
 
-            //after sending a process to CPU, set CPU to be busy
-            isCpuIdle = false;
-
-
+            run(jobToRun, a, p);
         }
 
     }
 
 
 
+    public void run(Job jobToRun, int[] a, int[]p) {
 
+        //send jobToRun to CPU
+        a[0] = 2;
+        p[2] = jobToRun.getJobAddress();
+        p[3] = jobToRun.getJobSize();
+        p[4] = timeQuantum;
+
+        //after sending a process to CPU, set CPU to be busy
+        isCpuIdle = false;
+    }
 
 
 
