@@ -1,76 +1,67 @@
-import java.util.*;
-
-class MemoryManager {
-	public ArrayList<int[]> memory; //declare list for memory
-	public ListIterator<int[]> i; //declare iterator to traverse memory
-	public int max[] = {0, 100};
-	public int space[]; // only index [0] and [1] are going to be used
-	public int free;
+// BEST FIT
+public class memoryManager {
+	public int[] memory = new int[100];
 	
-	public MemoryManager() {
-		memory = new ArrayList<int[]>(); //initialize memory
-		i = memory.listIterator(); //set iterator to memory
-		memory.add(max); //initializes with arrays start at 0 and end 100
-	}
-	
-	
-	public int freeSpace(int jobSize) {
-		//loop if there are jobs in the list to check or until we find
-		//a free space to place a job in
-		while(i.hasNext()==true) {
-			space = i.next();
-			//if free space is greater than the size of job
-			if(space[1] > jobSize) { 
-				available = space[0];
-				//item[0] is end pointer of job
-				//eg. for job#1  occupied 18
-				space[0] = space[0]+jobSize;
-				//is available space
-				//available space 82
-				space[1] = space[1]-jobSize;
-				//return the available free space to place a job in
-				return free;
+	public int bestFit(int jobSize, int jobNumber) {
+		int freeSpace = 0;
+		int start = -1;
+		int bestStart = -1;
+		int bestFit = 101;
+		int i;
+		//Iterate over the whole 100 memory table
+		for(i=0; i<100; i++) {
+			//when memory[i] is "0" -- it means the space is free
+			if(memory[i] == 0) {
+				//first 0 we find we make it our start
+				if(freeSpace==0) {
+					start=i;	
+				}
+				//increment our freeSpace for every free memory we find
+				//next to our start
+				freeSpace++;
 			}
-		}
-		//return when No free space available
-		return -1;
-	}
-	
-	public void remove(int jobSize, int jobAddress) {
-		//jobAddress is the start of the job to be deleted
-		while(true) {
-			space = i.next();
-			//space[0] gives us the first job found with endpointer 
-			//greater than the the starting address of the job to be deleted
-			if(space[0] > jobAddress) {
-				//free up the space
-				i.previous();
-				int newSpace[] = {jobAddress, size};
-				i.add(nextSpace);
-				//space in the table has been freed
-				//we exit the loop
-				break;
-			}
+			//when we find a space that is not free (any other than 0)
+			else { 
+				//if we found freeSpaces we --
+				if(freeSpace>0) {
+					//check if the new freeSpaces are greater than job size 
+					//AND
+					//check if the new freeSpace is less than the BestFit
+					if(freeSpace>=jobSize && freeSpace<bestFit) {
+						//if true save to the best values
+						bestStart=start;
+						bestFit=freeSpace;
+					}
+					//set freeSpace back to 0, to check the rest of the
+					//freeSpaces left in memory (if there is)
+					freeSpace=0;
+				}
+			}			
 		}
 		
-		//holds the job spaces to be erased/merged
-		int prevSpace[] = i.next();
-		while(i.hasNext() == true) {
-			//space holds each job space in memory
-			//eg job#1 = space 82
-			space = i.next();
-			//when space holds the memory space next to the previous
-			//job that is free, we merge them together
-			//and remove it.
-			//eg. job#1 prevSpace[0] = 0 , prevSpace[1] = 18
-			//the free space available next to it is space[0]
-			//which starts at 18, total free space[1] = 82
-			//so after adding we get 100 free space back
-			if(prevSpace[0] + prevSpace[1] == space[0]) {
-				prevSpace[1] = prevSpace[1]+space[1];
-				i.remove();
-			}
+		//for when the above loop's "else" and "if" condition is not reached
+		if(freeSpace>=jobSize && freeSpace<bestFit) {
+			bestStart=start;
 		}
+		
+		//Fill the table with the job number that is occupying their 
+		//respective spaces in memory.
+		if(bestStart!=-1)
+			for(i=bestStart; i<bestStart+jobSize; i++)
+				memory[i]=jobNumber;
+				
+		//returns the location in memory where a job is to be placed.
+		//OR -1 if there's no place to place the job
+		return bestStart;
 	}
 	
-}
+	
+	public void remove(int start, int size) {
+		//set memory spaces that were occupied by job back to 0
+		for(int i = start; i<start+size; i++)
+			memory[i] = 0;
+	}
+	
+	public void displayMemoryTable(){
+	}
+}	 
