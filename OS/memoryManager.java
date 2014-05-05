@@ -61,7 +61,4 @@ public class memoryManager {
 		for(int i = start; i<start+size; i++)
 			memory[i] = 0;
 	}
-	
-	public void displayMemoryTable(){
-	}
 }	 
