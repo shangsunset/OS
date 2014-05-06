@@ -14,6 +14,7 @@ public class CpuScheduler {
 
 
     }
+	
 
 
     public void addJobToReadyQueue(Job newJob) {
@@ -37,7 +38,7 @@ public class CpuScheduler {
         return isCpuIdle;
     }
 
-    public void schedule(int[] a, int[] p) {
+    public void roundRobin(int[] a, int[] p, LinkedList<Job> jobTable) {
 
         //as long as there is job in ready queue and CPU is idle, send job to CPU
         while(readyQueue.size() >0 && isCpuIdle) {
