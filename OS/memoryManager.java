@@ -1,6 +1,6 @@
 // BEST FIT
 public class memoryManager {
-	public int[] memory = new int[100];
+	private int[] memory = new int[100];
 	
 	public int bestFit(int jobSize, int jobNumber) {
 		int freeSpace = 0;
