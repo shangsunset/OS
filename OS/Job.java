@@ -9,10 +9,10 @@ public class Job {
     private int jobAddress;
 	private MemoryManager memory;
     private boolean isBlocked = false;
-    private boolean isInCore = false;
-    private boolean isInDrum = false;
-    private boolean isInCpu = false;
-    private boolean isInIO = false;
+    private boolean inCore = false;
+    private boolean inDrum = false;
+    private boolean inCpu = false;
+    private boolean inIO = false;
 	private boolean finished = false;
 	private boolean remove = false;
 
@@ -51,27 +51,47 @@ public class Job {
 	public boolean isFinished() {
 		return finished;
 	}
+	
+	public void setBlocked(boolean b) {
+		isBlocked = b;
+	}
 
     public boolean isBlocked() {
         return isBlocked;
     }
+	
+	public void setInCore(boolean b) {
+		inCore = b;
+	}
 
     public boolean isInCore() {
-        return isInCore;
+        return inCore;
     }
 
+	public void setInDrum(boolean b) {
+		inDrum = b;
+	}
+	
     public boolean isInDrum() {
-        return isInDrum;
+        return inDrum;
     }
 
+	public void setInCpu(boolean b) {
+		inCpu = b;
+	}
+	
     public boolean isInCpu() {
-        return isInCpu;
+        return inCpu;
     }
 
     public boolean isInIO() {
         return isInIO;
     }
 
+	public void setInIO(boolean b) {
+		inIO = b;
+	}
+	
     public int getJobAddress() {
         return jobAddress;
     }

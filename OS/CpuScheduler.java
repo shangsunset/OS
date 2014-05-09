@@ -1,51 +1,10 @@
 import java.util.*;
 
-//RoundRobin
 public class CpuScheduler {
-
-    private LinkedList<Job> readyQueue= new LinkedList<Job>();;
-    private int timeQuantum = 10;
-
-    public void addJobToReadyQueue(Job newJob) {
-
-        readyQueue.add(newJob);
-    }
-
-    public void roundRobin(int[] a, int[] p, LinkedList<Job> jobTable) {
-
-        //as long as there is job in ready queue and CPU is idle, send job to CPU
-        while(readyQueue.size() >0 && !readyQueue.get(0).isFinished) {
-            //remove the job about to run from ready queue
-            jobToRun = readyQueue.remove(0);
-
-            if(readyQueue.size() > 0) {
-                //rotate the queue to point to next job. it will be next jobToRun after current jobToRun finishes
-                Collections.rotate(readyQueue, 1);
-            }
-
-            run(jobToRun, a, p);
-        }
-
-    }
-
-    public void run(Job jobToRun, int[] a, int[]p) {
-
-        //send jobToRun to CPU
-        a[0] = 2;
-        p[2] = jobToRun.getJobAddress();
-        p[3] = jobToRun.getJobSize();
-        p[4] = timeQuantum;
-
-        //after sending a process to CPU, set CPU to be busy
-        isCpuIdle = false;
-    }
-
-
-////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////
-	/*    FCFS scheduling algorithm     */
+	/*    Round Robin scheduling algorithm     */
+	private int timeQuantum = 20;
 	private Job previousJob = new Job(); //will hold the old running job
-	public Job FCFS(int[] a, int[] p, LinkedList<Job> jobTable) {
+	public Job roundRobin(int[] a, int[] p, LinkedList<Job> jobTable) {
 		Job runJob = previousJob;
 		if(jobTable.size()==1){
 			//table only has 1 job so we set that job to run
@@ -72,13 +31,23 @@ public class CpuScheduler {
 			return new Job();
 		}
 		
-		if(runJob.getCpuTimeUsed<=runJob.getMaxCpuTime() && !runJob.isBlocked()) {
-			//run job and return the running job to os
-			a[0]=2;
-			p[2]=runJob.getJobAddress();
-			p[3]=runJob.getJobSize();
-			p[4]=runJob.getMaxCpuTime - runJob.getCpuTimeUsed();
-			return runJob;
+		if(!(runJob.getMaxCpuTime()==runJob.getCpuTimeUsed())) {
+			if(runJob.getMaxCpuTime() < timeQuantum + runJob.getCurrentTime() && !runJob.isBlocked() && runJob.isInMemory()) {
+				//run job and return the running job to os
+				a[0]=2;
+				p[2]=runJob.getJobAddress();
+				p[3]=runJob.getJobSize();
+				p[4]=runJob.getMaxCpuTime - runJob.getCpuTimeUsed();
+				return runJob;
+			}
+			else if(runJob.getMaxCpuTime() >= timeQuantum && !runJob.isBlocked() && runJob.isInMemory()) {
+				//run job and return the running job to os
+				a[0]=2;
+				p[2]=runJob.getJobAddress();
+				p[3]=runJob.getJobSize();
+				p[4]=timeQuantum;
+				return runJob;
+			}
 		}
 		
 		//no jobs to run
