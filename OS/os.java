@@ -5,7 +5,7 @@ public class os {
     public static LinkedList<Job> jobTable;
     public static DrumManager drumManager;
     public static CpuScheduler scheduler;
-	public static MemoryManager memoryManger;
+	public static MemoryManager memoryManager;
 	public static Job runningJob;
     public static int drumToMemory = 0;
     public static int memoryToDrum = 1;
@@ -41,7 +41,7 @@ public class os {
 		while(i.hasNext()) {
 			Job j = i.next();
 			if(j.isFinished() && /*io queue does not contain (j)*/ ) {
-				memoryManager.remove(j.getJobAddress(), j.getJobSize());
+				MemoryManager.remove(j.getJobAddress(), j.getJobSize());
 				jobTable.setRemove(true);
 			}
 		}
@@ -52,7 +52,7 @@ public class os {
 			}
 		}
 		
-		Job newJob = new Job(memoryMager, p);
+		Job newJob = new Job(memoryManager, p);
 		jobTable.add(newJob);
 		
 		if(newJob.getJobAddress() != -1) {
@@ -141,7 +141,7 @@ public class os {
 	
 	public static void terminate() {
 		if( /*io queue does not contains the running job*/ ) {
-			memoryManager.remove(runningJob.getJobAddress(), runningJob.getJobSize());
+			MemoryManager.remove(runningJob.getJobAddress(), runningJob.getJobSize());
 			jobTable.remove(runningJob);
 		}
 		else
