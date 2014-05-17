@@ -3,55 +3,55 @@ public class Job {
     private int jobPriority;
     private int jobSize;
     private int jobAddress;
-	private int maxCpuTime;
+    private int maxCpuTime;
     private int cpuTimeUsed;
-	private int direction;
-	private boolean inMemory = false;
+    private int direction;
+    private boolean inMemory = false;
     private boolean isBlocked = false;
     private boolean inIO = false;
-	private boolean finished = false;
-	private boolean latched = false;
-	private MemoryManager memory;
+    private boolean finished = false;
+    private boolean latched = false;
+    private MemoryManager memory;
 
-    public Job() {}
+    	public Job() {}
 
-    public Job(MemoryManager m, int p[]) {
+    	public Job(MemoryManager m, int p[]) {
 		memory = m;
-        jobNumber = p[1];
-        jobPriority = p[2];
-        jobSize = p[3];
-        maxCpuTime = p[4];
-        cpuTimeUsed = 0;
+        	jobNumber = p[1];
+        	jobPriority = p[2];
+        	jobSize = p[3];
+        	maxCpuTime = p[4];
+        	cpuTimeUsed = 0;
 	}
 	
 	public int getJobNumber() {
-        return jobNumber;
-    }
+        	return jobNumber;
+    	}
 
-    public int getJobPriority() {
-        return jobPriority;
-    }
+    	public int getJobPriority() {
+        	return jobPriority;
+    	}
 
 
-    public int getJobSize() {
-        return jobSize;
-    }
+    	public int getJobSize() {
+        	return jobSize;
+    	}
 	
 	public int getJobAddress() {
-        return jobAddress;
-    }
-	
+        	return jobAddress;
+    	}
+		
 	public int getMaxCpuTime() {
-        return maxCpuTime;
-    }
+        	return maxCpuTime;
+    	}
 	
 	public int getCpuTimeUsed() {
-        return cpuTimeUsed;
-    }
+        	return cpuTimeUsed;
+    	}
 	 
-    public void updateCpuTimeUsed(int currentTime, int time) {
-        cpuTimeUsed = cpuTimeUsed + (currentTime-time);
-    }
+    	public void updateCpuTimeUsed(int currentTime, int time) {
+        	cpuTimeUsed = cpuTimeUsed + (currentTime-time);
+    	}
 	
 	public int getDirection() {
 		return direction;
@@ -73,13 +73,13 @@ public class Job {
 		isBlocked = b;
 	}
 
-    public boolean isBlocked() {
-        return isBlocked;
-    }
+    	public boolean isBlocked() {
+        	return isBlocked;
+    	}
 	
 	public boolean isInIO() {
-        return inIO;
-    }
+        	return inIO;
+    	}
 
 	public void setInIO(boolean b) {
 		inIO = b;
