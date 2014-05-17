@@ -1,118 +1,111 @@
 public class Job {
-    private int number;
-    private int priority;
-    private int size;
-    private int maxCpu;
-    private int currentTime;
-    private int location;
-    private boolean inMemory=false;
-    private boolean latched = false;
-    private boolean blocked = false;
-    private boolean terminated = false;
-    private String direction;
-    private MemoryManager memory;
+    private int jobNumber;
+    private int jobPriority;
+    private int jobSize;
+    private int jobAddress;
+	private int maxCpuTime;
+    private int cpuTimeUsed;
+	private int direction;
+	private boolean inMemory = false;
+    private boolean isBlocked = false;
+    private boolean inIO = false;
+	private boolean finished = false;
+	private boolean latched = false;
+	private MemoryManager memory;
 
-    public Job() {
-        number = -1;
-    }
-    public Job(int number, int priority, int size, int maxCpu, int CurrentTime, MemoryManager memory) {
-        this.number=number;
-        this.priority=priority;
-        this.size=size;
-        this.maxCpu=maxCpu;
-        this.currentTime=0;
-        this.memory = memory;
-        location = memory.find_space(size, number);
+    public Job() {}
 
+    public Job(MemoryManager m, int p[]) {
+		memory = m;
+        jobNumber = p[1];
+        jobPriority = p[2];
+        jobSize = p[3];
+        maxCpuTime = p[4];
+        cpuTimeUsed = 0;
+	}
+	
+	public int getJobNumber() {
+        return jobNumber;
     }
 
-    public boolean isTerminated() {
-        return terminated;
+    public int getJobPriority() {
+        return jobPriority;
     }
-    public void setTerminated(boolean terminated) {
-        this.terminated = terminated;
+
+
+    public int getJobSize() {
+        return jobSize;
     }
-    public String getDirection() {
-        return direction;
+	
+	public int getJobAddress() {
+        return jobAddress;
     }
-    public void setDirection(String direction) {
-        this.direction = direction;
+	
+	public int getMaxCpuTime() {
+        return maxCpuTime;
     }
+	
+	public int getCpuTimeUsed() {
+        return cpuTimeUsed;
+    }
+	 
+    public void updateCpuTimeUsed(int currentTime, int time) {
+        cpuTimeUsed = cpuTimeUsed + (currentTime-time);
+    }
+	
+	public int getDirection() {
+		return direction;
+	}
+	
+	public void setDirection(int d) {
+		direction = d;
+	}
+	
+	public boolean isInMemory() {
+		return inMemory;
+	}
+	
+	public void setInMemory(boolean b) {
+		inMemory = b;
+	}
+	
+	public void setBlocked(boolean b) {
+		isBlocked = b;
+	}
+
     public boolean isBlocked() {
-        return blocked;
+        return isBlocked;
     }
-    public void setBlocked(boolean blocked) {
-        this.blocked = blocked;
-    }
-    public boolean isInMemory() {
-        return inMemory;
+	
+	public boolean isInIO() {
+        return inIO;
     }
 
-    public void setInMemory(boolean inMemory) {
-        this.inMemory = inMemory;
-    }
-
-    public boolean isLatched() {
-        return latched;
-    }
-
-    public void setLatched(boolean latched) {
-        this.latched = latched;
-    }
-
-    public int getLocation() {
-        return location;
-    }
-
-    public void setLocation(int location) {
-        this.location = location;
-    }
-
-    public int getNumber() {
-        return number;
-    }
-    public void setNumber(int number) {
-        this.number = number;
-    }
-    public int getPriority() {
-        return priority;
-    }
-    public void setPriority(int priority) {
-        this.priority = priority;
-    }
-    public int getSize() {
-        return size;
-    }
-    public void setSize(int size) {
-        this.size = size;
-    }
-    public int getMaxCpu() {
-        return maxCpu;
-    }
-    public void setMaxCpu(int maxCpu) {
-        this.maxCpu = maxCpu;
-    }
-    public int getCurrentTime() {
-        return currentTime;
-    }
-    public void setCurrentTime(int currentTime) {
-        this.currentTime = currentTime;
-    }
-    /*
-    public void remove() {
-        memory.getDrum().queueJob(this, "out");
-    }*/
-    public boolean findMemoryLocation() {
-
-        location  = memory.find_space(size, number);
-        if (location == -1) {
-            return false;
-        } else {
-            return true;
-        }
-    }
-    public MemoryManager getMemory() {
-        return memory;
-    }
-
+	public void setInIO(boolean b) {
+		inIO = b;
+	}
+	
+	public int findSpace() {
+		jobAddress = memory.bestFit(jobSize, jobNumber);
+		return jobAddress;
+	}
+	
+	public void setFinished(boolean b) {
+		finished = b;
+	}
+	
+	public boolean isFinished() {
+		return finished;
+	}
+	
+	public boolean isLatched() {
+		return latched;
+	}
+	
+	public void setLatched(boolean b) {
+		latched = b;
+	}
+	
 }
+
+
