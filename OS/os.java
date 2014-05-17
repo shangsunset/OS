@@ -1,26 +1,25 @@
 import java.util.*;
-
 public class os {
-	/* INITIALIZATION */
+    /* INITIALIZATION */
     public static LinkedList<Job> jobTable;
     public static DrumManager drumManager;
     public static CpuScheduler scheduler;
-	public static MemoryManager memoryManager;
-	public static IoManager ioManager;
-	public static Job runningJob;
+    public static MemoryManager memoryManager;
+    public static IoManager ioManager;
+    public static Job runningJob;
     public static int time;
-	public static ListIterator<Job> itr;
+    public static ListIterator<Job> itr;
 	
-    public static void startup() {
+    	public static void startup() {
 	  	//sos.ontrace();
 		jobTable = new LinkedList<Job>();
-        drumManager = new DrumManager();
-        scheduler = new CpuScheduler();
+        	drumManager = new DrumManager();
+        	scheduler = new CpuScheduler();
 		memoryManager = new MemoryManager();
 		ioManager = new IoManager();
 		runningJob = new Job();
 		time = 0;
-	}
+    	}
 
 	public static void Crint(int[] a, int[] p) {        
 		bookKeeper(p[5]);
@@ -78,7 +77,7 @@ public class os {
 		drumManager.swapper(jobTable);
 		
 		runningJob = scheduler.roundRobin(a, p, jobTable);
-    }
+    	}
 	
 	/* TIMER-RUN-OUT */
 	public static void Tro(int[] a, int[] p) {
