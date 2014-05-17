@@ -1,17 +1,29 @@
-public class IOmanager {
-	 public  LinkedList<Job> IOqueue;
+import java.util.*;
 
-	 public IOmanager(){
-		 IOqueue = new LinkedList<Job>();
-	 }
-	 
-	 public Job requestIO(Job job)
-	 {
-		IOqueue.add(job); //add job requesting IO to IO queue 
-	 }
-	 
-	 public Job IOcompleted(Job job) {
-		job.setLatch(false); //IO completed, remove latch bit
-		IOQueue.removeLast(); //Remove job from queue		 
-	 }
+public class IoManager {
+	public LinkedList<Job> io = new LinkedList<Job>();
+	
+	//places a job into io queue if there is a job doing io
+	//otherwise send it to do disk io
+	public void addToIO(Job job) {
+		io.add(job);
+		job.setInIO(true);
+		if(io.size() == 1) {
+			job.setLatched(true);
+			sos.siodisk(job.getJobNumber());
+		} 
+	}
+	public void removeIO() {
+		Job j = io.get(0);
+		io.remove(j);
+		if(!io.contains(j))
+			j.setBlocked(false);
+		j.setInIO(false);
+		j.setLatched(false);
+		
+		if(io.size() > 0) {
+			io.get(0).setLatched(true);
+			sos.siodisk(io.get(0).getJobNumber());
+		}		
+	}
 }

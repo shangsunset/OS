@@ -1,104 +1,8 @@
-/*import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.ListIterator;
-
-
-public class MemoryManager {
-	 public  LinkedList<int[]> memory;
-	 public int location;
-	 //private DrumManager drum;
-	 public MemoryManager(){//DrumManager drum) {
-		 memory= new LinkedList<int[]>();
-		 int []init =  {0, 100};
-		 //for(int i=0; i<100; i++)
-			memory.add(init);
-		// this.drum = drum;
-	 }
-	 
-	 
-	 public int find_space(int size){
-		 ListIterator<int[]> itr = memory.listIterator();
-		   while(itr.hasNext()==true)
-		    {
-			
-		     int []entry = itr.next();
-			 
-		     if(entry[1] > size) {
-			 //System.out.println(entry[1]);
-			 //adds job
-		    	 location = entry[0];
-		    	 entry[0] += size;
-				 System.out.println("entry[0]: " +entry[0]);
-		    	 entry[1] -= size;
-				 System.out.println("entry[1]: " +entry[1]);
-		    	 return location;
-		     }
-		    }
-			//no values in mem
-		   return -1;
-	 }
-
-	 public void removeJob(int location, int size){
-		 //ListIterator<int[]> itr = memory.listIterator();
-		 boolean spaceFreed = false;
-
-		  // if (!spaceFreed) {
-			   ListIterator<int[]> itr1 = memory.listIterator();
-			   while(spaceFreed == false && itr1.hasNext()) {
-				   int []entry = itr1.next();
-				   //itr1.next();
-				   if(entry[0] > location) {
-				   System.out.println("OLD "+entry[0] +" "+entry[1]+" "+ location);
-					   entry = itr1.previous();
-					   System.out.println("OLD2 "+entry[0] +" "+entry[1]+" "+ location);
-					   int newEntry[] = {location, size};
-					   System.out.println("NEW "+newEntry[0] +" "+ newEntry[1]);
-					   itr1.add(newEntry);
-					   spaceFreed = true;
-				   }
-				   
-			   //}
-		   }
-		   joinEntries();
-	 }
-	 public void displayMemoryTable() {
-		 //System.out.println("++++++++++++++++++++++");
-		 //System.out.println("| location \t| size \t|");
-
-		 //for(int[] entry : memory) {
-			// System.out.println("| " + entry[0] + "\t\t| " + entry[1] + "\t|");
-		// }
-		 //System.out.println("++++++++++++++++++++++");
-
-	 }
-	 public void joinEntries() {
-	 //System.out.println("ENTRY JOB");
-		 ListIterator<int[]> itr = memory.listIterator();
-		 int[] lastEntry=itr.next();;
-		   while(itr.hasNext())
-		    {
-			 if(lastEntry == null) {
-				  //lastEntry = itr.next();
-				 //continue;
-			  }
-		     int []entry = itr.next();
-		     if(lastEntry[0] + lastEntry[1] == entry[0]  ) {
-				//System.out.println("last:" +entry[1]);
-		    	 lastEntry[1] += entry[1];
-		    	 itr.remove();
-				 //break;
-		     } 
-		    }
-	 }
-	 
-}*/
-
-
-// BEST FIT
+import java.util.*;
 public class MemoryManager {
     public int[] memory = new int[100];
 
-    public int find_space(int jobSize, int jobNumber) {
+    public int bestFit(int jobSize, int jobNumber) {
         int freeSpace = 0;
         int start = -1;
         int bestStart = -1;
@@ -156,13 +60,5 @@ public class MemoryManager {
         //set memory spaces that were occupied by job back to 0
         for(int i = start; i<start+size; i++)
             memory[i] = 0;
-    }
-//
-//    public void removeJobFromMemory(Job job, String direction) {
-//        job.setDirection(direction);
-//
-//    }
-
-    public void displayMemoryTable(){
     }
 }	 
