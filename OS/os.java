@@ -13,8 +13,8 @@ public class os {
     	public static void startup() {
 	  	//sos.ontrace();
 		jobTable = new LinkedList<Job>();
-        	drumManager = new DrumManager();
-        	scheduler = new CpuScheduler();
+    	drumManager = new DrumManager();
+    	scheduler = new CpuScheduler();
 		memoryManager = new MemoryManager();
 		ioManager = new IoManager();
 		runningJob = new Job();
@@ -85,7 +85,7 @@ public class os {
 
         //run out of cpuTime
         if(runningJob.getMaxCpuTime() - runningJob.getCpuTimeUsed() == 0)
-                terminate();
+            terminate();
         
         drumManager.swapper(jobTable);
 		
