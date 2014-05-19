@@ -8,20 +8,24 @@ public class IoManager {
 	public void addToIO(Job job) {
 		io.add(job);
 		job.setInIO(true);
-		if(io.size() == 1) {
-			job.setLatched(true);
-			sos.siodisk(job.getJobNumber());
+		
+		//Do requested IO for job if there are no other jobs waiting in the queue
+		if(io.size() == 1) {									
+			job.setLatched(true);								
+			sos.siodisk(job.getJobNumber());					
 		} 
 	}
 	public void removeIO() {
-		Job j = io.get(0);
-		io.remove(j);
+		//IO completed for job at top of queue, remove job from queue 
+		Job j = io.get(0);										
+		io.remove(j);											
 		if(!io.contains(j))
 			j.setBlocked(false);
 		j.setInIO(false);
 		j.setLatched(false);
 		
-		if(io.size() > 0) {
+		//Do IO for next job waiting in the queue
+		if(io.size() > 0) {										
 			io.get(0).setLatched(true);
 			sos.siodisk(io.get(0).getJobNumber());
 		}		
